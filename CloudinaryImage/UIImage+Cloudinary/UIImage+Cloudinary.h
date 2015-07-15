@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+UIKIT_EXTERN NSString *const CloudinaryWidthAttributeName;
+UIKIT_EXTERN NSString *const CloudinaryHeightAttributeName;
+
 typedef void (^CloudinaryCompletionBlock)(UIImage *image);
 
 @interface UIImage (Cloudinary)
 
-+ (UIImage*) imageWithCloudinaryUsername:(NSString*) username path:(NSString*) path withPlaceholderImage:(UIImage*) placeholderImage complete:(CloudinaryCompletionBlock) complete;
++ (UIImage*) imageWithCloudinaryUsername:(NSString*) username path:(NSString*) path complete:(CloudinaryCompletionBlock) complete;
++ (UIImage*) imageWithCloudinaryUsername:(NSString*) username path:(NSString*) path usingAttributes:(NSDictionary*) attributes withPlaceholderImage:(UIImage*) placeholderImage complete:(CloudinaryCompletionBlock) complete;
 
 @end

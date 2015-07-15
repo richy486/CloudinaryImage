@@ -24,6 +24,8 @@
     
     self.imageView.image = [UIImage imageWithCloudinaryUsername:@"demo"
                                                            path:@"image/upload/sample.jpg"
+                                                usingAttributes:@{CloudinaryWidthAttributeName: @(100)
+                                                                  , CloudinaryHeightAttributeName: @(100)}
                                            withPlaceholderImage:[UIImage imageNamed:@"placeholder.jpg"]
                                                        complete:^(UIImage *image) {
                                                            if (image) {
