@@ -15,30 +15,13 @@ static NSString *const CLOUDINARY_STANDARD_DIRECTORY = @"/image/upload/";
 
 + (UIImage*) imageWithCloudinaryUsername:(NSString*) username path:(NSString*) path withPlaceholderImage:(UIImage*) placeholderImage complete:(CloudinaryCompletionBlock) complete {
     
-    NSString *filename = [path lastPathComponent];
-    NSMutableString *imageUrlString = [[NSMutableString alloc] initWithString:CLOUDINARY_BASE_URL_STRING];
-    [imageUrlString appendString:@"/"];
-    [imageUrlString appendString:username];
-    
-    if (path.pathComponents.count > 2) {
-        if (![[path substringToIndex:1] isEqualToString:@"/"]) {
-            [imageUrlString appendString:@"/"];
-        }
-    } else {
-        [imageUrlString appendString:CLOUDINARY_STANDARD_DIRECTORY];
-    }
-    
-    [imageUrlString appendString:path];
-    
-    
-    
-    NSURL *imageUrl = [NSURL URLWithString:imageUrlString];
+    NSString *cacheKey = [path stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
     
     NSString *cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:[cachePath stringByAppendingPathComponent:filename]]) {
+    if ([[NSFileManager defaultManager] fileExistsAtPath:[cachePath stringByAppendingPathComponent:cacheKey]]) {
         
         // If image is caches use that
-        NSData *imageData = [NSData dataWithContentsOfFile:[cachePath stringByAppendingPathComponent:filename]];
+        NSData *imageData = [NSData dataWithContentsOfFile:[cachePath stringByAppendingPathComponent:cacheKey]];
         UIImage *image = [UIImage imageWithData:imageData];
         
         if (complete) {
@@ -47,6 +30,22 @@ static NSString *const CLOUDINARY_STANDARD_DIRECTORY = @"/image/upload/";
         return image;
     } else {
         
+        NSMutableString *imageUrlString = [[NSMutableString alloc] initWithString:CLOUDINARY_BASE_URL_STRING];
+        [imageUrlString appendString:@"/"];
+        [imageUrlString appendString:username];
+        
+        if (path.pathComponents.count > 2) {
+            if (![[path substringToIndex:1] isEqualToString:@"/"]) {
+                [imageUrlString appendString:@"/"];
+            }
+        } else {
+            [imageUrlString appendString:CLOUDINARY_STANDARD_DIRECTORY];
+        }
+        
+        [imageUrlString appendString:path];
+        NSURL *imageUrl = [NSURL URLWithString:imageUrlString];
+        
+        
         // If the image is not found in the cache download it
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSData *imageData = [[NSData alloc] initWithContentsOfURL:imageUrl];
@@ -54,7 +53,7 @@ static NSString *const CLOUDINARY_STANDARD_DIRECTORY = @"/image/upload/";
             // Cache the image
             dispatch_async(dispatch_get_global_queue(0, 0), ^{
                 NSError *error = nil;
-                [imageData writeToFile:[cachePath stringByAppendingPathComponent:filename] options:NSDataWritingAtomic error:&error];
+                [imageData writeToFile:[cachePath stringByAppendingPathComponent:cacheKey] options:NSDataWritingAtomic error:&error];
                 if (error) {
                     NSLog(@"error: %@, %@", [error localizedDescription], [error localizedFailureReason]);
                 }

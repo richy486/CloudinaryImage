@@ -13,4 +13,4 @@ Usage:
                                                            [self.activityIndicator stopAnimating];
                                                        }];
 
-CloudinaryCompletionBlock image will be nil if cached image is found that matches lastPathComponent of path.
+CloudinaryCompletionBlock image will be nil if cached image is found that matcheslast path.
