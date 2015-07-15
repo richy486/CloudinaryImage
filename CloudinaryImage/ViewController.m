@@ -7,8 +7,11 @@
 //
 
 #import "ViewController.h"
+#import "UIImage+Cloudinary.h"
 
 @interface ViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -16,7 +19,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    [self.activityIndicator startAnimating];
+    
+    self.imageView.image = [UIImage imageWithCloudinaryUsername:@"demo"
+                                                           path:@"image/upload/sample.jpg"
+                                           withPlaceholderImage:[UIImage imageNamed:@"placeholder.jpg"]
+                                                       complete:^(UIImage *image) {
+                                                           if (image) {
+                                                               self.imageView.image = image;
+                                                           }
+                                                           [self.activityIndicator stopAnimating];
+                                                       }];
 }
 
 - (void)didReceiveMemoryWarning {

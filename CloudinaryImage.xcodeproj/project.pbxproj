@@ -14,6 +14,8 @@
 		B95F70331B568B3500A7779D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B95F70321B568B3500A7779D /* Images.xcassets */; };
 		B95F70361B568B3500A7779D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B95F70341B568B3500A7779D /* LaunchScreen.xib */; };
 		B95F70421B568B3500A7779D /* CloudinaryImageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B95F70411B568B3500A7779D /* CloudinaryImageTests.m */; };
+		B95F70521B568B7D00A7779D /* UIImage+Cloudinary.m in Sources */ = {isa = PBXBuildFile; fileRef = B95F70511B568B7D00A7779D /* UIImage+Cloudinary.m */; };
+		B95F70561B56970000A7779D /* placeholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B95F70551B56970000A7779D /* placeholder.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,9 @@
 		B95F703B1B568B3500A7779D /* CloudinaryImageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CloudinaryImageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B95F70401B568B3500A7779D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B95F70411B568B3500A7779D /* CloudinaryImageTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CloudinaryImageTests.m; sourceTree = "<group>"; };
+		B95F70501B568B7D00A7779D /* UIImage+Cloudinary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Cloudinary.h"; sourceTree = "<group>"; };
+		B95F70511B568B7D00A7779D /* UIImage+Cloudinary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Cloudinary.m"; sourceTree = "<group>"; };
+		B95F70551B56970000A7779D /* placeholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = placeholder.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,10 +86,12 @@
 		B95F70241B568B3500A7779D /* CloudinaryImage */ = {
 			isa = PBXGroup;
 			children = (
+				B95F704F1B568B7D00A7779D /* UIImage+Cloudinary */,
 				B95F70291B568B3500A7779D /* AppDelegate.h */,
 				B95F702A1B568B3500A7779D /* AppDelegate.m */,
 				B95F702C1B568B3500A7779D /* ViewController.h */,
 				B95F702D1B568B3500A7779D /* ViewController.m */,
+				B95F70551B56970000A7779D /* placeholder.jpg */,
 				B95F702F1B568B3500A7779D /* Main.storyboard */,
 				B95F70321B568B3500A7779D /* Images.xcassets */,
 				B95F70341B568B3500A7779D /* LaunchScreen.xib */,
@@ -117,6 +124,15 @@
 				B95F70401B568B3500A7779D /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B95F704F1B568B7D00A7779D /* UIImage+Cloudinary */ = {
+			isa = PBXGroup;
+			children = (
+				B95F70501B568B7D00A7779D /* UIImage+Cloudinary.h */,
+				B95F70511B568B7D00A7779D /* UIImage+Cloudinary.m */,
+			);
+			path = "UIImage+Cloudinary";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,6 +218,7 @@
 				B95F70311B568B3500A7779D /* Main.storyboard in Resources */,
 				B95F70361B568B3500A7779D /* LaunchScreen.xib in Resources */,
 				B95F70331B568B3500A7779D /* Images.xcassets in Resources */,
+				B95F70561B56970000A7779D /* placeholder.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,6 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B95F702E1B568B3500A7779D /* ViewController.m in Sources */,
+				B95F70521B568B7D00A7779D /* UIImage+Cloudinary.m in Sources */,
 				B95F702B1B568B3500A7779D /* AppDelegate.m in Sources */,
 				B95F70281B568B3500A7779D /* main.m in Sources */,
 			);
