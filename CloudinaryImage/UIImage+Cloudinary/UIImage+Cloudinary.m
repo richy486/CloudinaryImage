@@ -33,7 +33,7 @@ static NSString *const CLOUDINARY_STANDARD_DIRECTORY = @"/image/upload/";
             [self appendAttributeValueFromKey:CloudinaryWidthAttributeName fromAttributes:attributes toString:attributesString usingParamater:@"w"];
             [self appendAttributeValueFromKey:CloudinaryHeightAttributeName fromAttributes:attributes toString:attributesString usingParamater:@"h"];
             
-            cacheKey = [NSString stringWithFormat:@"%tu_%@", attributesString, cacheKey];
+            cacheKey = [NSString stringWithFormat:@"%@_%@", attributesString, cacheKey];
         }
         
         // Check if cached image exists
