@@ -25,10 +25,15 @@ static NSString *const CLOUDINARY_STANDARD_DIRECTORY = @"/image/upload/";
     if (username && path) {
         NSString *cacheKey = [path stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
         
-        // Add a hash of the attributes so different versions of the image can be cached separately.
-        if (attributes) {
-            NSUInteger hash = [attributes hash];
-            cacheKey = [NSString stringWithFormat:@"%tu_%@", hash, cacheKey];
+        // Add a the attribute string to the key so different versions of the image can be cached separately.
+        NSMutableString *attributesString = nil;
+        if (attributes && attributes.count > 0) {
+            
+            attributesString = [NSMutableString stringWithString:@""];
+            [self appendAttributeValueFromKey:CloudinaryWidthAttributeName fromAttributes:attributes toString:attributesString usingParamater:@"w"];
+            [self appendAttributeValueFromKey:CloudinaryHeightAttributeName fromAttributes:attributes toString:attributesString usingParamater:@"h"];
+            
+            cacheKey = [NSString stringWithFormat:@"%tu_%@", attributesString, cacheKey];
         }
         
         // Check if cached image exists
@@ -66,16 +71,9 @@ static NSString *const CLOUDINARY_STANDARD_DIRECTORY = @"/image/upload/";
                 endPath = [NSMutableString stringWithString:path];
             }
             
-            if (attributes && attributes.count > 0) {
-                
-                NSMutableString *attributesString = [NSMutableString stringWithString:@""];
-                [self appendAttributeValueFromKey:CloudinaryWidthAttributeName fromAttributes:attributes toString:attributesString usingParamater:@"w"];
-                [self appendAttributeValueFromKey:CloudinaryHeightAttributeName fromAttributes:attributes toString:attributesString usingParamater:@"h"];
-                
-                if (attributesString.length > 0) {
-                    [imageUrlString appendString:attributesString];
-                    [imageUrlString appendString:@"/"];
-                }
+            if (attributesString) {
+                [imageUrlString appendString:attributesString];
+                [imageUrlString appendString:@"/"];
             }
             
             [imageUrlString appendString:endPath];
@@ -116,7 +114,6 @@ static NSString *const CLOUDINARY_STANDARD_DIRECTORY = @"/image/upload/";
         
         id value = attributes[key];
         [string appendString:[NSString stringWithFormat:@"%@_%@", paramater, value]];
-        
     }
 }
 
