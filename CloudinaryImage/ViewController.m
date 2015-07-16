@@ -22,10 +22,12 @@
     
     [self.activityIndicator startAnimating];
     
+    CGFloat deviceScale = [[UIScreen mainScreen] scale];
+    
     self.imageView.image = [UIImage imageWithCloudinaryUsername:@"demo"
                                                            path:@"image/upload/sample.jpg"
-                                                usingAttributes:@{CloudinaryWidthAttributeName: @(100)
-                                                                  , CloudinaryHeightAttributeName: @(100)}
+                                                usingAttributes:@{CloudinaryWidthAttributeName: @(100 * deviceScale)
+                                                                  , CloudinaryHeightAttributeName: @(100 * deviceScale)}
                                            withPlaceholderImage:[UIImage imageNamed:@"placeholder.jpg"]
                                                        complete:^(UIImage *image) {
                                                            if (image) {
