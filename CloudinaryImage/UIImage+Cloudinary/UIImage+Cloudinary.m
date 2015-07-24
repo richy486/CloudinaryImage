@@ -10,6 +10,7 @@
 
 NSString *const CloudinaryWidthAttributeName = @"kCloudinaryWidthAttributeName";
 NSString *const CloudinaryHeightAttributeName = @"kCloudinaryHeightAttributeName";
+NSString *const CloudinaryCropModeAttributeName = @"kCloudinaryCropModeAttributeName";
 
 static NSString *const CLOUDINARY_BASE_URL_STRING = @"http://res.cloudinary.com";
 static NSString *const CLOUDINARY_STANDARD_DIRECTORY = @"/image/upload/";
@@ -32,6 +33,7 @@ static NSString *const CLOUDINARY_STANDARD_DIRECTORY = @"/image/upload/";
             attributesString = [NSMutableString stringWithString:@""];
             [self appendAttributeValueFromKey:CloudinaryWidthAttributeName fromAttributes:attributes toString:attributesString usingParamater:@"w"];
             [self appendAttributeValueFromKey:CloudinaryHeightAttributeName fromAttributes:attributes toString:attributesString usingParamater:@"h"];
+            [self appendAttributeValueFromKey:CloudinaryCropModeAttributeName fromAttributes:attributes toString:attributesString usingParamater:@"c"];
             
             cacheKey = [NSString stringWithFormat:@"%@_%@", attributesString, cacheKey];
         }
@@ -112,8 +114,15 @@ static NSString *const CLOUDINARY_STANDARD_DIRECTORY = @"/image/upload/";
             [string appendString:@","];
         }
         
-        id value = attributes[key];
+        id value = nil;
+        if ([key isEqualToString:CloudinaryWidthAttributeName] || [key isEqualToString:CloudinaryHeightAttributeName]) {
+            CGFloat deviceScale = [[UIScreen mainScreen] scale];
+            value = [NSNumber numberWithInteger:[(NSNumber*)attributes[key] integerValue] * deviceScale];
+        } else {
+            value = attributes[key];
+        }
         [string appendString:[NSString stringWithFormat:@"%@_%@", paramater, value]];
+        
     }
 }
 

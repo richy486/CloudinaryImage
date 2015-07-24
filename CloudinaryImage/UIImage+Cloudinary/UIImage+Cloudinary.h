@@ -10,6 +10,7 @@
 
 UIKIT_EXTERN NSString *const CloudinaryWidthAttributeName;
 UIKIT_EXTERN NSString *const CloudinaryHeightAttributeName;
+UIKIT_EXTERN NSString *const CloudinaryCropModeAttributeName;
 
 typedef void (^CloudinaryCompletionBlock)(UIImage *image);
 
