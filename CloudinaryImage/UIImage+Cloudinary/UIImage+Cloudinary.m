@@ -31,9 +31,9 @@ static NSString *const CLOUDINARY_STANDARD_DIRECTORY = @"/image/upload/";
         if (attributes && attributes.count > 0) {
             
             attributesString = [NSMutableString stringWithString:@""];
-            [self appendAttributeValueFromKey:CloudinaryWidthAttributeName fromAttributes:attributes toString:attributesString usingParamater:@"w"];
-            [self appendAttributeValueFromKey:CloudinaryHeightAttributeName fromAttributes:attributes toString:attributesString usingParamater:@"h"];
-            [self appendAttributeValueFromKey:CloudinaryCropModeAttributeName fromAttributes:attributes toString:attributesString usingParamater:@"c"];
+            [self appendAttributeValueFromKey:CloudinaryWidthAttributeName fromAttributes:attributes toString:attributesString usingParameter:@"w"];
+            [self appendAttributeValueFromKey:CloudinaryHeightAttributeName fromAttributes:attributes toString:attributesString usingParameter:@"h"];
+            [self appendAttributeValueFromKey:CloudinaryCropModeAttributeName fromAttributes:attributes toString:attributesString usingParameter:@"c"];
             
             cacheKey = [NSString stringWithFormat:@"%@_%@", attributesString, cacheKey];
         }
@@ -108,7 +108,7 @@ static NSString *const CLOUDINARY_STANDARD_DIRECTORY = @"/image/upload/";
     return placeholderImage;
 }
 
-+ (void) appendAttributeValueFromKey:(NSString*) key fromAttributes:(NSDictionary*) attributes toString:(NSMutableString*) string usingParamater:(NSString*) paramater {
++ (void) appendAttributeValueFromKey:(NSString*) key fromAttributes:(NSDictionary*) attributes toString:(NSMutableString*) string usingParameter:(NSString*) parameter {
     if (attributes[key]) {
         if (string.length > 0) {
             [string appendString:@","];
@@ -121,7 +121,7 @@ static NSString *const CLOUDINARY_STANDARD_DIRECTORY = @"/image/upload/";
         } else {
             value = attributes[key];
         }
-        [string appendString:[NSString stringWithFormat:@"%@_%@", paramater, value]];
+        [string appendString:[NSString stringWithFormat:@"%@_%@", parameter, value]];
         
     }
 }
