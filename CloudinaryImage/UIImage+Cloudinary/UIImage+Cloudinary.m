@@ -44,7 +44,7 @@ static NSString *const CLOUDINARY_STANDARD_DIRECTORY = @"/image/upload/";
             
             // If image is caches use that
             NSData *imageData = [NSData dataWithContentsOfFile:[cachePath stringByAppendingPathComponent:cacheKey]];
-            UIImage *image = [UIImage imageWithData:imageData];
+            UIImage *image = [UIImage imageWithData:imageData scale:[UIScreen mainScreen].scale];
             
             if (complete) {
                 complete(nil);
@@ -95,7 +95,7 @@ static NSString *const CLOUDINARY_STANDARD_DIRECTORY = @"/image/upload/";
                     }
                 });
                 
-                UIImage *image = [UIImage imageWithData:imageData];
+                UIImage *image = [UIImage imageWithData:imageData scale:[UIScreen mainScreen].scale];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (complete) {
                         complete(image);
